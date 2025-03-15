@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Card Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            transition: background 0.3s;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: left;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background: #fff;
+            text-align: left;
+        }
+        button {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Information Card</h2>
+        <button onclick="getUserDetails()">Enter Details</button>
+        <div id="userCard" class="card" style="display:none;"></div>
+    </div>
+    <script>
+        function getUserDetails() {
+            const user = {
+                firstName: prompt("Enter First Name:"),
+                lastName: prompt("Enter Last Name:"),
+                country: "India",
+                phone: prompt("Enter Phone Number:"),
+                state: prompt("Enter State:"),
+                city: prompt("Enter City:"),
+                village: prompt("Enter Village:")
+            };
+            localStorage.setItem("user", JSON.stringify(user));
+            displayUser();
+        }
+
+        function displayUser() {
+            const userData = JSON.parse(localStorage.getItem("user"));
+            if (userData) {
+                document.getElementById("userCard").innerHTML = `
+                    <h3>User Information Card</h3>
+                    <p><strong>First Name:</strong> ${userData.firstName}</p>
+                    <p><strong>Last Name:</strong> ${userData.lastName}</p>
+                    <p><strong>Country:</strong> ${userData.country}</p>
+                    <p><strong>Phone Number:</strong> ${userData.phone}</p>
+                    <p><strong>State:</strong> ${userData.state}</p>
+                    <p><strong>City:</strong> ${userData.city}</p>
+                    <p><strong>Village:</strong> ${userData.village}</p>
+                `;
+                document.getElementById("userCard").style.display = "block";
+            }
+        }
+
+        displayUser();
+    </script>
+</body>
+</html>
